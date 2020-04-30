@@ -9,9 +9,16 @@ export const CARD_COMPONENT_MAP = {
     html: 'koenig-card-html',
     code: 'koenig-card-code',
     embed: 'koenig-card-embed',
+/*LLIUREX Hide options	
     bookmark: 'koenig-card-bookmark',
+LLIUREX */	
     gallery: 'koenig-card-gallery',
+// LLIUREX Add option to publish local video 	
+    video: 'koenig-card-video'		
+// LLIUREX
+/*LLIUREX Hide options		
     email: 'koenig-card-email'
+LLIUREX */	
 };
 
 // map card names to generic icons (used for ghost elements when dragging)
@@ -23,9 +30,17 @@ export const CARD_ICON_MAP = {
     html: 'koenig/kg-card-type-html',
     code: 'koenig/kg-card-type-gen-embed',
     embed: 'koenig/kg-card-type-gen-embed',
+/* LLIUREX Hide option  
     bookmark: 'koenig/kg-card-type-bookmark',
+  LLIUREX Hide option  */
     gallery: 'koenig/kg-card-type-gallery',
+// LLIUREX Add option to publish local video 	
+    video: 'koenig/kg-card-type-video'
+// LLIUREX  
+/* LLIUREX Hide option  	
     email: 'koenig/kg-card-type-gen-embed'
+LLIUREX Hide option  */
+
 };
 
 // TODO: move koenigOptions directly into cards now that card components register
@@ -34,7 +49,9 @@ export default [
     createComponentCard('card-markdown'), // backwards-compat with markdown editor
     createComponentCard('code', {deleteIfEmpty: 'payload.code'}),
     createComponentCard('embed', {hasEditMode: false, deleteIfEmpty: 'payload.html'}),
+/*LLIUREX Hide options   
     createComponentCard('bookmark', {hasEditMode: false, deleteIfEmpty: 'payload.metadata'}),
+LLIUREX */    
     createComponentCard('hr', {hasEditMode: false, selectAfterInsert: false}),
     createComponentCard('html', {deleteIfEmpty: 'payload.html'}),
     createComponentCard('image', {hasEditMode: false, deleteIfEmpty(card) {
@@ -42,7 +59,14 @@ export default [
     }}),
     createComponentCard('markdown', {deleteIfEmpty: 'payload.markdown'}),
     createComponentCard('gallery', {hasEditMode: false}),
+     // LLIUREX Add option to publish local video 	
+    createComponentCard('video', {hasEditMode: false, deleteIfEmpty(card) {
+        return card.payload.imageSelector && !card.payload.src;
+    }}),
+    // LLIUREX  	
+/*LLIUREX Hide option    
     createComponentCard('email', {deleteIfEmpty: 'payload.html'})
+ LLIUREX */   
 ];
 
 export const CARD_MENU = [
@@ -84,6 +108,18 @@ export const CARD_MENU = [
             type: 'card',
             replaceArg: 'gallery'
         },
+	{
+            label: 'Video',
+            icon: 'koenig/kg-card-type-video',
+            iconClass: 'kg-card-type-native',
+            matches: ['video'],
+            type: 'card',
+            replaceArg: 'video',
+            params: ['src'],
+            payload: {
+                triggerBrowse: true
+            }
+	},
         {
             label: 'Divider',
             icon: 'koenig/kg-card-type-divider',
@@ -91,7 +127,9 @@ export const CARD_MENU = [
             matches: ['divider', 'horizontal-rule', 'hr'],
             type: 'card',
             replaceArg: 'hr'
-        },
+        }
+/* LLIUREX Hide option
+	,
         {
             label: 'Bookmark',
             icon: 'koenig/kg-card-type-bookmark',
@@ -106,7 +144,9 @@ export const CARD_MENU = [
             matches: ['email'],
             type: 'card',
             replaceArg: 'email'
-        }]
+        }
+	LLIUREX */
+	]
     },
     {
         title: 'Embed',
@@ -145,7 +185,8 @@ export const CARD_MENU = [
             payload: {
                 imageSelector: 'unsplash'
             }
-        },
+        }
+	/* LLIUREX Hide option ,
         {
             label: 'Vimeo',
             icon: 'koenig/kg-card-type-vimeo',
@@ -187,6 +228,8 @@ export const CARD_MENU = [
             type: 'card',
             replaceArg: 'embed',
             params: ['url']
-        }]
+        }
+	LLIUREX */
+	]
     }
 ];

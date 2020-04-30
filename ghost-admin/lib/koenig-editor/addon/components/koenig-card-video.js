@@ -1,10 +1,6 @@
 import $ from 'jquery';
 import Component from '@ember/component';
-import layout from '../templates/components/koenig-card-image';
-import {
-    IMAGE_EXTENSIONS,
-    IMAGE_MIME_TYPES
-} from 'ghost-admin/components/gh-image-uploader';
+import layout from '../templates/components/koenig-card-video';
 import {action, computed, set, setProperties} from '@ember/object';
 import {utils as ghostHelperUtils} from '@tryghost/helpers';
 import {htmlSafe} from '@ember/string';
@@ -15,7 +11,7 @@ import {inject as service} from '@ember/service';
 const {countWords} = ghostHelperUtils;
 
 export default Component.extend({
-    ui: service(),
+    ui: service(),	
     intl: service(),
     layout,
 
@@ -25,8 +21,8 @@ export default Component.extend({
     payload: null,
     isSelected: false,
     isEditing: false,
-    imageExtensions: IMAGE_EXTENSIONS,
-    imageMimeTypes: IMAGE_MIME_TYPES,
+    imageExtensions: ['mp4','ogv','ogg'],
+    imageMimeTypes: ['video/mp4','video/ogv','video/ogg'],
 
     // properties
     handlesDragDrop: true,
@@ -54,17 +50,17 @@ export default Component.extend({
 
     counts: computed('payload.{src,caption}', function () {
         let wordCount = 0;
-        let imageCount = 0;
+        let videoCount = 0;
 
         if (this.payload.src) {
-            imageCount += 1;
+            videoCount += 1;
         }
 
         if (this.payload.caption) {
             wordCount += countWords(this.payload.caption);
         }
 
-        return {wordCount, imageCount};
+        return {wordCount, videoCount};
     }),
 
     kgImgStyle: computed('payload.cardWidth', function () {
@@ -81,6 +77,7 @@ export default Component.extend({
         return 'image-normal';
     }),
 
+/*  
     toolbar: computed('payload.{cardWidth,src}', function () {
         if (!this.payload.src) {
             return false;
@@ -90,35 +87,14 @@ export default Component.extend({
 
         return {
             items: [{
-                title: this.intl.t('koenig.img.Regular'),
-                icon: 'koenig/kg-img-regular',
-                iconClass: `${!cardWidth ? 'fill-blue-l2' : 'fill-white'}`,
-                action: run.bind(this, this._changeCardWidth, '')
-            }, {
-                title: this.intl.t('koenig.img.Wide'),
-                icon: 'koenig/kg-img-wide',
-                iconClass: `${cardWidth === 'wide' ? 'fill-blue-l2' : 'fill-white'}`,
-                action: run.bind(this, this._changeCardWidth, 'wide')
-            }, {
-                title: this.intl.t('koenig.img.Full'),
-                icon: 'koenig/kg-img-full',
-                iconClass: `${cardWidth === 'full' ? 'fill-blue-l2' : 'fill-white'}`,
-                action: run.bind(this, this._changeCardWidth, 'full')
-            }, {
-                divider: true
-            }
-	    /*LLIUREX Hide option
-	    , {
-                title: this.intl.t('koenig.img.Replace image'),
+                title: 'Replace image',
                 icon: 'koenig/kg-replace',
                 iconClass: 'fill-white',
                 action: run.bind(this, this._triggerFileDialog)
-            }
-	    LLIUREX */
-	    ]
+            }]
         };
     }),
-
+*/
     init() {
         this._super(...arguments);
 
@@ -166,11 +142,13 @@ export default Component.extend({
 
     actions: {
         updateSrc(images) {
+	
+	  
             let [image] = images;
 
             // create undo snapshot when image finishes uploading
             this.editor.run(() => {
-                this._updatePayloadAttr('src', image.url);
+		this._updatePayloadAttr('src', image.url);
             });
         },
 
@@ -185,7 +163,8 @@ export default Component.extend({
         },
 
         setPreviewSrc(files) {
-            let file = files[0];
+           this.set('previewSrc', null);
+	   let file = files[0];
             if (file) {
                 let reader = new FileReader();
 
@@ -269,7 +248,10 @@ export default Component.extend({
     },
 
     drop(event) {
-        event.preventDefault();
+	
+	event.preventDefault();
+	this._updatePayloadAttr('src', null);
+      
         this.set('isDraggedOver', false);
 
         if (event.dataTransfer.files) {
@@ -292,6 +274,7 @@ export default Component.extend({
 
         // update the mobiledoc and stay in edit mode
         save(payload, false);
+	 
     },
 
     _triggerFileDialog(event) {
