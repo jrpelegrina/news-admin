@@ -16,7 +16,9 @@
     {{/if}}
 
     <section class="view-container gh-team">
-    {{!-- Show invited users to everyone except authors --}}
+    {{!-- Show invited users to everyone except authors --}} 
+{{!-- LLIUREX Hide content
+		
     {{#unless this.currentUser.isAuthorOrContributor}}
         {{#if this.invites}}
         <section class="apps-grid-container gh-invited-users apps-first-header" data-test-invited-users>
@@ -70,7 +72,7 @@
         </section>
         {{/if}}
     {{/unless}}
-
+LLIUREX --}}	
     <section class="apps-grid-container gh-active-users {{unless this.invites "apps-first-header"}}" data-test-active-users>
         <span class="apps-grid-title">{{t "Active users"}}</span>
         <div class="apps-grid">

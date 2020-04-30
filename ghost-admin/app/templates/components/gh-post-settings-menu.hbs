@@ -68,13 +68,14 @@
                     {{/unless}}
                 </div>
 
+{{!-- LLIUREX Hide content
                 {{#unless this.session.user.isContributor}}
                 <div class="form-group">
                     <label for="tag-input">{{t "Tags"}}</label>
                     <GhPsmTagsInput @post={{this.post}} @triggerId="tag-input" />
                 </div>
                 {{/unless}}
-
+LLIUREX --}}
 
                 {{#if this.feature.members}}
                     {{#if this.showVisibilityInput}}
@@ -84,7 +85,7 @@
                         </div>
                     {{/if}}
                 {{/if}}
-
+{{!-- LLIUREX Hide content
                 <GhFormGroup @errors={{this.post.errors}} @hasValidated={{this.post.hasValidated}} @property="customExcerpt">
                     <label for="custom-excerpt">{{t "Excerpt"}}</label>
                     <GhTextarea
@@ -99,7 +100,7 @@
                     />
                     <GhErrorMessage @errors={{this.post.errors}} @property="customExcerpt" data-test-error="custom-excerpt" />
                 </GhFormGroup>
-
+LLIUREX --}}
                 {{#unless this.session.user.isAuthorOrContributor}}
                     <GhFormGroup @class="for-select" @errors={{this.post.errors}} @hasValidated={{this.post.hasValidated}} @property="authors" data-test-input="authors">
                         <label for="author-list">{{t "Authors"}}</label>
@@ -107,7 +108,7 @@
                         <GhErrorMessage @errors={{this.post.errors}} @property="authors" data-test-error="authors" />
                     </GhFormGroup>
                 {{/unless}}
-
+{{!-- LLIUREX Hide content
                 <ul class="nav-list nav-list-block">
                     <li class="nav-list-item" {{action "showSubview" "meta-data"}} data-test-button="meta-data">
                         <button type="button">
@@ -147,7 +148,8 @@
                         {{svg-jar "arrow-right"}}
                     </li>
                 </ul>
-
+LLIUREX --}}
+{{!-- LLIUREX Hide content
                 {{#unless this.session.user.isAuthorOrContributor}}
                 <div class="form-group for-checkbox">
                     <label class="checkbox" for="featured" {{action "toggleFeatured" bubbles="false"}}>
@@ -163,7 +165,7 @@
                     </label>
                 </div>
                 {{/unless}}
-
+LLIUREX --}}
                 <GhPsmTemplateSelect
                     @post={{this.post}}
                     @onTemplateSelect={{action (mut this.post.customTemplate)}} />

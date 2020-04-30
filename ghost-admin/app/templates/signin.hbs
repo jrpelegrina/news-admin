@@ -5,10 +5,9 @@
                 <GhFormGroup @errors={{this.signin.errors}} @hasValidated={{this.hasValidated}} @property="identification">
                     <span class="gh-input-icon gh-icon-mail">
                         {{svg-jar "email"}}
-                        <GhTrimFocusInput
-                            @class="email"
-                            @type="email"
-                            @placeholder={{t "Email Address"}}
+			{{!-- LLIUREX Changed email by username --}}                        
+			<GhTrimFocusInput
+                            @placeholder={{t "User name"}}
                             @name="identification"
                             @autocapitalize="off"
                             @autocorrect="off"
@@ -34,7 +33,7 @@
                             @autocorrect="off"
                             @value={{readonly this.signin.password}}
                             @input={{action (mut this.signin.password) value="target.value"}} />
-
+			{{!-- LLIUREX Hide button
                         <GhTaskButton
                             @task={{this.forgotten}}
                             @class="forgotten-link gh-btn gh-btn-link gh-btn-icon"
@@ -46,9 +45,10 @@
                         >
                             <span>{{#if task.isRunning}}{{svg-jar "spinner" class="gh-spinner"}}{{else}}{{t "Forgot?"}}{{/if}}</span>
                         </GhTaskButton>
+			LLIUREX --}}
                     </span>
                 </GhFormGroup>
-
+		
                 <GhTaskButton @buttonText="{{t "taskButton.Sign in"}}"
                     @task={{this.validateAndAuthenticate}}
                     @showSuccess={{false}}
