@@ -88,17 +88,22 @@ export default Controller.extend(ValidationEngine, {
 
         try {
             yield this.validate({property: 'signin'});
+	/* LLIUREX Complete userid with @llxnews.com to obtain internal email*/    
             return yield this.authenticate
-                .perform(authStrategy, [signin.get('identification'), signin.get('password')])
+                .perform(authStrategy, [signin.get('identification')+"@llxnews.com", signin.get('password')])
                 .then(() => true);
+	/* LLIUREX */    
         } catch (error) {
             this.set('flowErrors', this.intl.t('Please fill out the form to sign in.'));
         }
     }).drop(),
 
     forgotten: task(function* () {
+	/* LLIUREX Complete userid with @llxnews.com to obtain internal email*/    
         let email = this.get('signin.identification');
-        let forgottenUrl = this.get('ghostPaths.url').api('authentication', 'passwordreset');
+	email+="@llxnews.com";
+      	/* LLIUREX */    
+	let forgottenUrl = this.get('ghostPaths.url').api('authentication', 'passwordreset');
         let notifications = this.notifications;
 
         this.set('flowErrors', '');
