@@ -1,6 +1,10 @@
 <div class="gh-flow">
     <div class="gh-flow-content-wrap">
         <section class="gh-flow-content">
+		{{!-- LLIUREX Added news logo --}}
+		<a href="{{this.config.blogUrl}}" class="center">
+				<img src="{{this.config.blogUrl}}/content/images/2020/03/news-logo.png" class="center" width="50%" height="auto">
+		</a>
             <form id="login" method="post" class="gh-signin" novalidate="novalidate" {{action "authenticate" on="submit"}}>
                 <GhFormGroup @errors={{this.signin.errors}} @hasValidated={{this.hasValidated}} @property="identification">
                     <span class="gh-input-icon gh-icon-mail">

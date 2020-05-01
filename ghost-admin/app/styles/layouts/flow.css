@@ -7,6 +7,8 @@
     flex-direction: column;
     overflow-y: auto;
     min-height: 100%;
+	/* LLIUREX: Changes color form #fff to #2855a7 */
+	background-color: #2855a7ff;
 }
 
 .gh-flow-head {
