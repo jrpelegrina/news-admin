@@ -167,6 +167,71 @@ function insertImageCards(files, postEditor) {
     postEditor.setRange(lastImageSection.tailPosition());
 }
 
+//LLIUREX New function
+// helper function to insert video cards at or after the current active section
+// used when pasting or dropping video files
+function insertVideoCards(files, postEditor) {
+    let {builder, editor} = postEditor;
+    let collection = editor.post.sections;
+    let section = editor.activeSection;
+
+    // when dropping an video on the editor before it's had focus there will be
+    // no active section so we insert the video at the end of the document
+    if (!section) {
+        section = editor.post.sections.tail;
+
+        // create a blank paragraph at the end of the document if needed because
+        // we use `insertSectionBefore` and don't want the video to be added
+        // before the last card
+        if (!section.isMarkerable) {
+            let blank = builder.createMarkupSection();
+            postEditor.insertSectionAtEnd(blank);
+            postEditor.setRange(blank.toRange());
+            section = postEditor._range.head.section;
+        }
+    }
+
+    // place the card after the active section
+    if (!section.isBlank && !section.isListItem && section.next) {
+        section = section.next;
+    }
+
+    // list items cannot contain card sections so insert a blank paragraph after
+    // the whole list ready to be replaced by the video cards
+    if (section.isListItem) {
+        let list = section.parent;
+        let blank = builder.createMarkupSection();
+        if (list.next) {
+            postEditor.insertSectionBefore(collection, blank, list.next);
+        } else {
+            postEditor.insertSectionAtEnd(blank);
+        }
+        postEditor.setRange(blank.toRange());
+        section = postEditor._range.head.section;
+    }
+
+    // insert an video card for each image, keep track of the last card to be
+    // inserted so that the cursor can be placed on it at the end
+    let lastVideoSection;
+    files.forEach((file) => {
+        let payload = {
+            files: [file]
+        };
+        lastVideoSection = builder.createCardSection('video', payload);
+        postEditor.insertSectionBefore(collection, lastVideoSection, section);
+    });
+
+    // remove the current section if it's blank - avoids unexpected blank
+    // paragraph after the insert is complete
+    if (section.isBlank) {
+        postEditor.removeSection(section);
+    }
+
+    // place cursor on the last inserted video
+    postEditor.setRange(lastVideoSection.tailPosition());
+}
+//LLIUREX
+
 export default Component.extend({
     koenigDragDropHandler: service(),
     intl: service(),
@@ -897,7 +962,18 @@ export default Component.extend({
             });
             return;
         }
+//LLIUREX. Enable drag and drop videe files	
+	let videos = Array.from(event.clipboardData.files).filter(file => file.type.indexOf('video') > -1);
+        if (videos.length > 0) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
 
+            editor.run((postEditor) => {
+                insertVideoCards(videos, postEditor);
+            });
+            return;
+        }
+	//LLIUREX
         let range = editor.range;
         let {html, text} = getContentFromPasteEvent(event);
 
@@ -1072,6 +1148,17 @@ export default Component.extend({
                 });
                 this._scrollCursorIntoView({jumpToCard: true});
             }
+	 //LLIUREX Enable Drag and Drop video files
+	    // }
+	   let videos = Array.from(event.dataTransfer.files).filter(file => file.type.indexOf('video') > -1);
+            if (videos.length > 0) {
+                this.editor.run((postEditor) => {
+                    insertVideoCards(videos, postEditor);
+                });
+                this._scrollCursorIntoView({jumpToCard: true});
+            }
+	//LLIUREX       
+    
         }
     },
 
@@ -1368,9 +1455,11 @@ export default Component.extend({
     _createCardDragElement(draggableInfo) {
         let {cardName} = draggableInfo;
 
-        if (!cardName || cardName === 'image') {
+      //LLIUREX. Added video cardName
+	if (!cardName || cardName === 'image'  || cardName==='video') {
             return;
         }
+	//LLIUREX
 
         let ghostElement = document.createElement('div');
         ghostElement.classList.add('absolute', 'flex', 'flex-column', 'justify-center',
@@ -1395,10 +1484,12 @@ export default Component.extend({
         let droppableIndex = droppables.indexOf(droppableElem);
         let draggableIndex = droppables.indexOf(draggableInfo.element);
 
-        // allow card and image drops (images can be dragged out of a gallery)
-        if (draggableInfo.type !== 'card' && draggableInfo.type !== 'image') {
+      //LLIUREX Allow video drops
+	      // allow card and image drops (images can be dragged out of a gallery)
+        if (draggableInfo.type !== 'card' && draggableInfo.type !== 'image' && draggableInfo.type !== 'video') {
             return false;
         }
+	//LLIUREX
 
         if (this._isCardDropAllowed(draggableIndex, droppableIndex, position)) {
             let insertIndex = droppableIndex;
@@ -1428,9 +1519,11 @@ export default Component.extend({
     },
 
     _onCardDrop(draggableInfo) {
-        if (draggableInfo.type !== 'card' && draggableInfo.type !== 'image') {
+     //LLIUREX- Allow video drop    
+        if (draggableInfo.type !== 'card' && draggableInfo.type !== 'image' && draggableInfo.type!=='video') {
             return false;
         }
+	//LLIUREX
 
         let droppables = Array.from(this.editor.element.querySelectorAll(':scope > *'));
         let draggableIndex = droppables.indexOf(draggableInfo.element);
@@ -1477,6 +1570,20 @@ export default Component.extend({
 
                 return true;
             }
+	      //LLIUREX Allow video drop 
+	    if (draggableInfo.type === 'video') {
+                // we need to create an image card from a raw image payload
+                this.editor.run((postEditor) => {
+                    let videoCard = postEditor.builder.createCardSection('video', draggableInfo.payload);
+                    let sections = this.editor.post.sections;
+                    let droppableSection = sections.objectAt(draggableInfo.insertIndex);
+                    postEditor.insertSectionBefore(sections, videoCard, droppableSection);
+                    postEditor.setRange(videoCard.tailPosition());
+                });
+		
+                return true;
+            }
+	    //LLIUREX
         }
     },
 
@@ -1529,6 +1636,9 @@ export default Component.extend({
 
         let wordCount = 0;
         let imageCount = 0;
+	//LLIUREX Added videoCount
+	let videoCount=0;
+	//LLIUREX
 
         this.editor.post.walkAllLeafSections((section) => {
             if (section.isCardSection) {
@@ -1537,22 +1647,28 @@ export default Component.extend({
                 let cardCounts = get(card, 'component.counts') || {};
                 wordCount += cardCounts.wordCount || 0;
                 imageCount += cardCounts.imageCount || 0;
+		//LLIUREX Added videoCount
+                videoCount += cardCounts.videoCount || 0;
+		//LLIUREX
             } else {
                 wordCount += countWords(section.text);
             }
         });
 
-        if (wordCount !== this.wordCount || imageCount !== this.imageCount) {
-            let readingTime = calculateReadingTime({wordCount, imageCount});
+       	//LLIUREX Added videoCount
+        if (wordCount !== this.wordCount || imageCount !== this.imageCount || videoCount !== this.videoCount )  {
+            let readingTime = calculateReadingTime({wordCount, imageCount, videoCount});
 
             this.setProperties({
                 wordCount,
                 imageCount,
+		videoCount,
                 readingTime
             });
 
-            this.wordCountDidChange({wordCount, imageCount, readingTime});
+            this.wordCountDidChange({wordCount, imageCount, videoCount, readingTime});
         }
+
     },
 
     _triggerTextHandlers() {
