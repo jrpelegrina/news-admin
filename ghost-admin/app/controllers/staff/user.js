@@ -35,7 +35,9 @@ export default Controller.extend({
     user: alias('model'),
     currentUser: alias('session.user'),
 
-    email: readOnly('user.email'),
+  /* LLIUREX 21/04/2020 Changes to update email when user changes slug
+   email: readOnly('user.email'),
+    LLIUREX 21/04/2020 */
     slugValue: boundOneWay('user.slug'),
 
     canChangeEmail: not('isAdminUserOnOwnerProfile'),
@@ -418,10 +420,18 @@ export default Controller.extend({
         let user = this.user;
         let slugValue = this.slugValue;
         let slugChanged;
+	/* LLIUREX 20/04/2020 Changes to update email when slug changes */    
+        let email=this.slugValue+"@llxnews.com";	
+      	/* LLIUREX 20/04/2020*/    
+
 
         if (user.get('slug') !== slugValue) {
             slugChanged = true;
             user.set('slug', slugValue);
+	/* LLIUREX 20/04/2020 Changes to update email when slug changes */    
+	    user.set('email',email);
+      	/* LLIUREX 20/04/2020*/    
+		
         }
 
         try {

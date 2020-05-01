@@ -9,7 +9,19 @@ const BAD_PASSWORDS = [
     'abcdefghij',
     '0987654321',
     '1q2w3e4r5t',
-    '12345asdfg'
+    '12345asdfg',
+     /* LLIUREX 21/04/2020 Change lenght from 10 characters to 6 */
+    '123456',
+    'qwerty',
+    'qwertz',
+    'asdfgh',
+    'abcdef',
+    '0987654',
+    '1q2w3e',
+    '12asd'
+      
+ /* LLIUREX 21/04/2020 */
+
 ];
 const DISALLOWED_PASSWORDS = ['ghost', 'password', 'passw0rd'];
 
@@ -63,9 +75,10 @@ export default Mixin.create({
 
         blogTitle = blogTitle ? blogTitle.trim().toLowerCase() : blogTitle;
 
+       /* LLIUREX 21/04/2020. Change length from 10 characters to 6 */
         // password must be longer than 10 characters
-        if (!validator.isLength(password || '', 10)) {
-            model.get('errors').add(errorTarget, this.t('validation.Password must be at least 10 characters long'));
+        if (!validator.isLength(password || '', 6)) {
+            model.get('errors').add(errorTarget, this.t('validation.Password must be at least 6 characters long'));
             return this.invalidate();
         }
 

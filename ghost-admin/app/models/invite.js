@@ -10,6 +10,11 @@ export default Model.extend({
     updatedAtUTC: attr('moment-utc'),
     updatedBy: attr('number'),
     status: attr('string'),
+ /* LLIUREX Added changes to use invite to add users */ 
+   user: attr('string'),
+    password:attr('string'),
+    password2:attr('string'),
+/*LLIUREX */	
 
     role: belongsTo('role', {async: false}),
 
