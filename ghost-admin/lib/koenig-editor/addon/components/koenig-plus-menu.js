@@ -82,12 +82,17 @@ export default Component.extend({
     },
 
     willDestroyElement() {
-        this._super(...arguments);
-        run.cancel(this._throttleResize);
-        window.removeEventListener('mousedown', this._onWindowMousedownHandler);
-        window.removeEventListener('resize', this._onResizeHandler);
-        window.removeEventListener('mousemove', this._onMousemoveHandler);
-        window.removeEventListener('keydown', this._onKeydownHandler);
+//LLIUREX: Catched error when load button failed	
+	try{
+		this._super(...arguments);
+		run.cancel(this._throttleResize);
+		window.removeEventListener('mousedown', this._onWindowMousedownHandler);
+		window.removeEventListener('resize', this._onResizeHandler);
+		window.removeEventListener('mousemove', this._onMousemoveHandler);
+		window.removeEventListener('keydown', this._onKeydownHandler);
+	}catch(e){}
+//LLIUREX: Catched error when load button failed	
+	
     },
 
     actions: {
@@ -100,35 +105,55 @@ export default Component.extend({
         },
 
         itemClicked(item) {
-            let range = this._editorRange;
+//LLIUREX: Catched error when load button failed	
+	    try{
+		    let range = this._editorRange;
 
-            if (item.type === 'card') {
-                this.replaceWithCardSection(item.replaceArg, range, item.payload);
-            }
+		    if (item.type === 'card') {
+			this.replaceWithCardSection(item.replaceArg, range, item.payload);
+		    }
 
-            this._hideButton();
-            this._hideMenu();
+		    this._hideButton();
+		    this._hideMenu();
+	    }catch(e){
+			this._hideButton();
+			this._hideMenu();
+			    
+	    }	
+	//LLIUREX: Catched error when load button failed			
         }
     },
 
     _showOrHideButton(editorRange) {
-        if (!editorRange) {
-            this._hideButton();
-            this._hideMenu();
-            return;
-        }
+	//LLIUREX: Catched error when load button failed	
+	    
+	try{    
+		if (!editorRange) {
+		    this._hideButton();
+		    this._hideMenu();
+		    return;
+		}
 
-        let {head: {section}} = editorRange;
+		let {head: {section}} = editorRange;
 
-        // show the button if the range is a blank paragraph
-        if (editorRange && editorRange.isCollapsed && section && !section.isListItem && (section.isBlank || section.text === '')) {
-            this._editorRange = editorRange;
-            this._showButton();
-            this._hideMenu();
-        } else {
-            this._hideButton();
-            this._hideMenu();
-        }
+		// show the button if the range is a blank paragraph
+		if (editorRange && editorRange.isCollapsed && section && !section.isListItem && (section.isBlank || section.text === '')) {
+		    this._editorRange = editorRange;
+		    this._showButton();
+		    this._hideMenu();
+		} else {
+		    this._hideButton();
+		    this._hideMenu();
+		}
+	}catch(e){
+			this._hideButton();
+			this._hideMenu();
+			
+	}	
+	//LLIUREX: Catched error when load button failed	
+	
+		
+		
     },
 
     _showButton() {
@@ -161,27 +186,33 @@ export default Component.extend({
     },
 
     _showMenu() {
-        this.set('showMenu', true);
+	 //LLIUREX: Catched error when load button failed	
+	try{
+		this.set('showMenu', true);
 
-        // move the cursor to the blank paragraph, ensures any selected card
-        // gets inserted in the correct place because editorRange will be
-        // wherever the cursor currently is if the menu was opened via a
-        // mouseover button
-        this._moveCaretToCachedEditorRange();
+		// move the cursor to the blank paragraph, ensures any selected card
+		// gets inserted in the correct place because editorRange will be
+		// wherever the cursor currently is if the menu was opened via a
+		// mouseover button
+		this._moveCaretToCachedEditorRange();
 
-        // focus the search immediately so that you can filter immediately
-        run.schedule('afterRender', this, function () {
-            this._focusSearch();
-        });
+		// focus the search immediately so that you can filter immediately
+		run.schedule('afterRender', this, function () {
+		    this._focusSearch();
+		});
 
-        // watch the window for mousedown events so that we can close the menu
-        // when we detect a click outside
-        this._onWindowMousedownHandler = run.bind(this, this._handleWindowMousedown);
-        window.addEventListener('mousedown', this._onWindowMousedownHandler);
+		// watch the window for mousedown events so that we can close the menu
+		// when we detect a click outside
+		this._onWindowMousedownHandler = run.bind(this, this._handleWindowMousedown);
+		window.addEventListener('mousedown', this._onWindowMousedownHandler);
 
-        // watch for keydown events so that we can close the menu on Escape
-        this._onKeydownHandler = run.bind(this, this._handleKeydown);
-        window.addEventListener('keydown', this._onKeydownHandler);
+		// watch for keydown events so that we can close the menu on Escape
+		this._onKeydownHandler = run.bind(this, this._handleKeydown);
+		window.addEventListener('keydown', this._onKeydownHandler);
+	}catch(e){
+		this.set('showMenu', false);
+	}
+	//LLIUREX: Catched error when load button failed	
     },
 
     _hideMenu() {
@@ -281,9 +312,17 @@ export default Component.extend({
     },
 
     _moveCaretToCachedEditorRange() {
-        this._ignoreRangeChange = true;
-        this.set('editorRange', this._editorRange);
-        this.editor.selectRange(this._editorRange);
+	//LLIUREX: Catched error when load button failed	
+	try{
+		this._ignoreRangeChange = true;
+		this.set('editorRange', this._editorRange);
+		this.editor.selectRange(this._editorRange);
+	}catch(e){
+		this._editorRange=null;
+		this.editor.selectRange(this._editorRange);
+
+	}
+	//LLIUREX: Catched error when load button failed	
     }
 
 });
