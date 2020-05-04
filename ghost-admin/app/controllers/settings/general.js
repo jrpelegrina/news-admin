@@ -32,6 +32,8 @@ export default Controller.extend({
     intl: service(),
 
     availableTimezones: null,
+    // LLIUREX Added List with locales
+    availableLocales:[{name:'en',label:'English'},{name:'es',label:'Spanish'},{name:'ca@valencia',label:"Valencian"}],
     iconExtensions: null,
     iconMimeTypes: 'image/png,image/x-icon',
     imageExtensions: IMAGE_EXTENSIONS,
@@ -44,6 +46,7 @@ export default Controller.extend({
         this.iconExtensions = ICON_EXTENSIONS;
     },
 
+ 
     privateRSSUrl: computed('config.blogUrl', 'settings.publicHash', function () {
         let blogUrl = this.get('config.blogUrl');
         let publicHash = this.get('settings.publicHash');
@@ -64,6 +67,7 @@ export default Controller.extend({
         return color;
     }),
 
+        
     actions: {
         save() {
             this.save.perform();
@@ -72,7 +76,10 @@ export default Controller.extend({
         setTimezone(timezone) {
             this.set('settings.activeTimezone', timezone.name);
         },
-
+        setLocale(locale) {
+            this.updateLocale=false;
+            this.set('settings.defaultLocale', locale.name);
+        },
         removeImage(image) {
             // setting `null` here will error as the server treats it as "null"
             this.settings.set(image, '');
@@ -349,5 +356,6 @@ export default Controller.extend({
             // Reset last task to bring button back to idle state
             yield this.set('saveSettings.last', null);
         }
-    })
+    }),
+  
 });

@@ -79,6 +79,7 @@
                     <div class="gh-setting-desc">{{t "Set the language/locale which is used on your site"}}</div>
                     {{#liquid-if this.defaultLocaleOpen}}
                     <div class="gh-setting-content-extended">
+                        {{!-- LLIUREX Field replaced to introduce the locale by drop-down list
                         <GhFormGroup @errors={{this.settings.errors}} @hasValidated={{this.settings.hasValidated}} @property="defaultLocale">
                             <GhTextInput
                                 @value={{readonly this.settings.defaultLocale}}
@@ -89,6 +90,14 @@
                             <GhErrorMessage @errors={{this.settings.errors}} @property="defaultLocale" />
                             <p>{{{t "Default: English (<strong>{defaultLocale}</strong>); you can add translation files to your theme for <a href=\"{link}\" target=\"_blank\" rel=\"noopener\">any language</a>" defaultLocale="en" link="https://ghost.org/docs/api/handlebars-themes/helpers/translate/"}}}</p>
                         </GhFormGroup>
+                        --}}
+                                          
+                       
+                         <GhLocaleSelect
+                            @defaultLocale={{this.settings.defaultLocale}}
+                            @availableLocales={{this.availableLocales}}
+                            @update={{action "setLocale"}} />
+                            
                     </div>
                     {{/liquid-if}}
                 </div>
