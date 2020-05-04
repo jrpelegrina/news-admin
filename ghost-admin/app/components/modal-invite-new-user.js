@@ -83,7 +83,7 @@ export default ModalComponent.extend(ValidationEngine, {
 	    if (existingUser) {
                 this.errors.clear('user');
                // if (existingUser) {
-                    this.errors.add('user', this.intl.t('validation.A user with that email address already exists.'));
+                    this.errors.add('user', this.intl.t('validation.A user already exists.'));
                /* } else {
                     this.errors.add('email', this.intl.t('validation.A user with that email address was already invited.'));
                 }*/
@@ -135,7 +135,7 @@ export default ModalComponent.extend(ValidationEngine, {
 
 			yield invite.save();
 			yield this._completeInvitation();
-			notifications.showNotification(this.int.t('Created User '), {icon: 'user-group2', key: 'invite.send.success', description:this.intl.t( 'User created successfully')});
+			notifications.showNotification(this.int.t('User created'), {icon: 'user-group2', key: 'invite.send.success', description:this.intl.t( 'User created successfully')});
 			yield this.store.query('user', {limit: 'all'});
 
 			this.send('closeModal');
@@ -155,7 +155,7 @@ export default ModalComponent.extend(ValidationEngine, {
 			yield this._completeInvitation();
 			yield this.store.query('user', {limit: 'all'});
 
-			notifications.showNotification(this.intl.t('Created User '), {icon: 'user-group2', key: 'invite.send.success', description:this.intl.t('User created successfully')});
+			notifications.showNotification(this.intl.t('User created'), {icon: 'user-group2', key: 'invite.send.success', description:this.intl.t('User created successfully')});
 			
 			this.send('closeModal');
 			

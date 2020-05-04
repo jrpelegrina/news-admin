@@ -337,6 +337,13 @@
   "Ownership successfully transferred to {user}": "Ownership successfully transferred to {user}",
   "The user could not be deleted. Please try again.": "The user could not be deleted. Please try again.",
   "(Never)": "(Never)",
+  "User created": "User created",
+  "User created successfully": "User created successfully",
+  "Add a New User": "Add a New User",
+  "Add New User": "Add New User",
+  "Username": "Username",
+  "Password": "Password",
+  "Verify Password": "Verify Password",
   "post": {
     "notification": {
       "view": "View post",
@@ -619,7 +626,12 @@
     "{email} was invalid: {message}": "{email} was invalid: {message}",
     "Please select a role.": "Please select a role.",
     "Please enter a name": "Please enter a name",
-    "Has already been used": "Has already been used"
+    "Has already been used": "Has already been used",
+    "A user already exists": "A user already exists",
+    "Please enter an username.": "Please enter an username.",
+    "Password must be at least 6 characters long": "Password must be at least 6 characters long",
+    "Please enter a password.": "Please enter a password.",
+    "Username is not valid": "Username is not valid"
   },
   "views": {
     "Drafts": "Drafts",
@@ -803,7 +815,8 @@
     "Upload routes YAML": "Upload routes YAML",
     "Upload redirects JSON": "Upload redirects JSON",
     "Copy link": "Copy link",
-    "Link copied": "Link copied"
+    "Link copied": "Link copied",
+    "Add user now": "Add user now"
   },
   "Publication info": "Publication info",
   "Title &amp; description": "Title &amp; description",
@@ -879,7 +892,8 @@
       "CodePen": "CodePen",
       "Spotify": "Spotify",
       "SoundCloud": "SoundCloud",
-      "Other...": "Other..."
+      "Other...": "Other...",
+      "Video": "Video"
     },
     "gallery": {
       "Galleries are limited to 9 images": "Galleries are limited to 9 images",
@@ -917,8 +931,9 @@
     },
       "video": {
       "Drop to replace video": "Drop to replace video",
-      "Click to select an video": "Click to select an video",
-      "Replace video": "Replace video"
+      "Click to select a video": "Click to select a video",
+      "Replace video": "Replace video",
+      "Drop it like it's hot 🔥": "Drop it like it's hot 🔥"
     },
     "Write here...": "Write here...",
     "toolbar": {

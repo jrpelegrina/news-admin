@@ -1,6 +1,6 @@
 <header class="modal-header">
     {{!-- LLIUREX Changes to use invitation to create user --}}
-    <h1>{{t "Create a New User"}}</h1>
+    <h1>{{t "Add a New User"}}</h1>
     {{!-- LLIUREX --}}</header>
 {{!-- disable mouseDown so it doesn't trigger focus-out validations --}}
 <a class="close" href title="{{t "common.Close"}}" {{action "closeModal"}} {{action (optional this.noop) on="mouseDown"}}>
@@ -93,7 +93,7 @@
 </div>
 
 <div class="modal-footer">
-    <GhTaskButton @buttonText={{t "taskButton.Add User now"}}
+    <GhTaskButton @buttonText={{t "taskButton.Add user now"}}
         @successText={{t "taskButton.Added"}}
         @task={{this.sendInvitation}}
         @class="gh-btn gh-btn-green gh-btn-icon"
