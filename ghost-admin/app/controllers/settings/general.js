@@ -32,14 +32,15 @@ export default Controller.extend({
     intl: service(),
 
     availableTimezones: null,
-    // LLIUREX Added List with locales
-    availableLocales:[{name:'en',label:'English'},{name:'es',label:'Spanish'},{name:'ca@valencia',label:"Valencian"}],
     iconExtensions: null,
     iconMimeTypes: 'image/png,image/x-icon',
     imageExtensions: IMAGE_EXTENSIONS,
     imageMimeTypes: IMAGE_MIME_TYPES,
     _scratchFacebook: null,
     _scratchTwitter: null,
+    //LLIUREX. Changes to show a drop list with locales 
+    currentLocale:null,
+    //LLIUREX
 
     init() {
         this._super(...arguments);
@@ -67,7 +68,32 @@ export default Controller.extend({
         return color;
     }),
 
+    //LLIUREX. Changes to show a drop list with locales 
+
+    availableLocales:computed(function(){
+
+       let locales=null;
+
+       this.currentLocale=this.get('settings.defaultLocale');
         
+       switch(this.currentLocale.toString()) {
+            case 'es':
+                locales= [{name:'es',label:'Español'},{name:'en',label:'Inglés'},{name:'ca@valencia',label:"Valenciano"}];
+                break;
+            case 'ca@valencia':
+                locales=[{name:'en',label:'Anglès'},{name:'es',label:'Espanyol'},{name:'ca@valencia',label:"Valencià"}];
+                break;
+            default:
+                locales=[{name:'en',label:'English'},{name:'es',label:'Spanish'},{name:'ca@valencia',label:"Valencian"}];
+            
+        }  
+   
+        return locales;
+
+    }),
+    
+    //LLIUREX
+   
     actions: {
         save() {
             this.save.perform();
@@ -77,7 +103,6 @@ export default Controller.extend({
             this.set('settings.activeTimezone', timezone.name);
         },
         setLocale(locale) {
-            this.updateLocale=false;
             this.set('settings.defaultLocale', locale.name);
         },
         removeImage(image) {
@@ -339,7 +364,6 @@ export default Controller.extend({
 
             // this forces the document title to recompute after a blog title change
             this.ui.updateDocumentTitle();
-
             return settings;
         } catch (error) {
             if (error) {
