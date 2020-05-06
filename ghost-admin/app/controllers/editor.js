@@ -762,11 +762,23 @@ export default Controller.extend({
         let notifications = this.notifications;
         let actions, type, path;
 
+        /* LLIUREX Fix code to enable correct translation
         type = this.get('post.page') ? 'page' : 'post';
         path = status === 'published' || status === 'scheduled'
             ? this.get('post.url')
             : this.get('post.previewUrl');
         actions = `<a href="${path}" target="_blank">${this.intl.t(`${this.get('post.displayName')}.notification.${type}`)}</a>`;
+        LLIUREX */
+       if (status === 'published' || status === 'scheduled') {
+            type = this.get('post.page') ? this.intl.t('Page') : this.intl.t('Post');
+            path = this.get('post.url');
+            actions = `<a href="${path}" target="_blank">${this.intl.t('View')} ${type}</a>`;
+        } else {
+            type = this.intl.t('Preview');
+            path = this.get('post.previewUrl');
+            actions = `<a href="${path}" target="_blank">${this.intl.t('View')} ${type}</a>`;
+        }
+
 
         notifications.showNotification(message, {type: 'success', actions: actions.htmlSafe(), delayed: delay});
     },

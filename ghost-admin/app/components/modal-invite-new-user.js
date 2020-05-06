@@ -83,7 +83,7 @@ export default ModalComponent.extend(ValidationEngine, {
 	    if (existingUser) {
                 this.errors.clear('user');
                // if (existingUser) {
-                    this.errors.add('user', this.intl.t('validation.A user already exists.'));
+                    this.errors.add('user', this.intl.t('validation.A user already exists'));
                /* } else {
                     this.errors.add('email', this.intl.t('validation.A user with that email address was already invited.'));
                 }*/

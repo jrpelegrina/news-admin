@@ -61,6 +61,7 @@ export default Controller.extend({
         this.jsonMimeType = JSON_MIME_TYPE;
         this.yamlExtension = YAML_EXTENSION;
         this.yamlMimeType = YAML_MIME_TYPE;
+        this.set('uploadButtonText', this.intl.t('Import'));
     },
 
     actions: {

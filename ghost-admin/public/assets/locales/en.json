@@ -345,7 +345,7 @@
   "Password": "Password",
   "Verify Password": "Verify Password",
   "post": {
-    "notification": {
+   "notification": {
       "view": "View post",
       "preview": "Preview post"
     },
@@ -991,7 +991,7 @@
   "Last update": "Last update",
   "Search site (Ctrl/⌘ + K)": "Search site (Ctrl/⌘ + K)",
   "Preview site": "Preview site",
-  "New story": "New story",
+  "New story": "New post",
   "members": {
     "{members, plural}": "{members, plural, =1{a member} other{# members}}",
     "Members": "Members",
@@ -1045,5 +1045,17 @@
   "<span class=\"ttu\">{currency}</span>/year": "<span class=\"ttu\">{currency}</span>/year",
   "A backup will be automatically downloaded to your device before deletion.": "A backup will be automatically downloaded to your device before deletion.",
   "<strong>{user}</strong> will be permanently deleted. A backup will be automatically downloaded to your device before deletion.": "<strong>{user}</strong> will be permanently deleted. A backup will be automatically downloaded to your device before deletion.",
-  "<strong>{user}</strong> and their <strong>{posts, plural}</strong> will be permanently deleted. If you don’t want to lose these posts, you should assign them to a different author.": "<strong>{user}</strong> and their <strong>{posts, plural, =1{a post} other{# posts}}</strong> will be permanently deleted. If you don’t want to lose these posts, you should assign them to a different author."
+  "<strong>{user}</strong> and their <strong>{posts, plural}</strong> will be permanently deleted. If you don’t want to lose these posts, you should assign them to a different author.": "<strong>{user}</strong> and their <strong>{posts, plural, =1{a post} other{# posts}}</strong> will be permanently deleted. If you don’t want to lose these posts, you should assign them to a different author.",
+  "Scheduled to be published and sent":"Scheduled to be published and sent",
+  "Failed to send post by email": "Failed to send post by email",
+  "To be sent by emai": "To be sent by emai",
+  "Sent by email":"Sent by email",
+  "Scheduled to be published {time}":"Scheduled to be published {time}",
+  "and sent":"and sent",
+  "View": "View",
+  "Preview": "Preview",
+  "Post": "Post",
+  "Update status": "Update status",
+  "Scheduled to be published":"Scheduled to be published"
+
 }
