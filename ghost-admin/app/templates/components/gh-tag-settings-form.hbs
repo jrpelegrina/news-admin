@@ -13,7 +13,9 @@
 
             <p class="description">
                 {{t "Start with # to create internal tags"}}
+                {{!-- LLIUREX Hide content
                 <a href="https://ghost.org/docs/concepts/tags/#internal-tag" target="_blank" rel="noreferrer">{{t "Learn more"}}</a>
+                LLIUREX --}}
             </p>
             <GhErrorMessage @errors={{this.tag.errors}} @property="name" />
         </GhFormGroup>
@@ -57,7 +59,7 @@
         />
     </div>
 </div>
-
+{{!-- LLIUREX Hide content
 <h4 class="midlightgrey f-small fw5 ttu mt15">{{t "Meta data"}}</h4>
 <div class="pa5 pt4 br4 shadow-1 bg-grouped-table mt2 flex flex-column flex-row-ns items-start justify-between">
     <div class="flex flex-column items-start mr5 w-100 w-50-m w-two-thirds-l">
@@ -101,3 +103,4 @@
         </div>
     </div>
 </div>
+LLIUREX --}}
