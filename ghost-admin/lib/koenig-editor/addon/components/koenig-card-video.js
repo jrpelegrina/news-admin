@@ -21,8 +21,8 @@ export default Component.extend({
     payload: null,
     isSelected: false,
     isEditing: false,
-    imageExtensions: ['mp4','ogv','ogg'],
-    imageMimeTypes: ['video/mp4','video/ogv','video/ogg'],
+    imageExtensions: ['mp4','ogv','ogg','webm'],
+    imageMimeTypes: ['video/mp4','video/ogv','video/ogg','video/webm'],
 
     // properties
     handlesDragDrop: true,
