@@ -909,7 +909,7 @@
     "md": {
       "Drop image(s) here to upload": "Suelte las imágenes aquí para cargar",
       "Upload failed": "Subida fallida",
-      "Uploading {images, plural}...": "Subiendo {imágenes, plural, =1{la imagen} other{# imágenes}}...",
+      "Uploading {images, plural}...": "Subiendo {images, plural, =1{la imagen} other{# imágenes}}...",
       "Edit": "Editar"
     },
     "link": {
