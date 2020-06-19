@@ -78,13 +78,13 @@ export default Controller.extend({
         
        switch(this.currentLocale.toString()) {
             case 'es':
-                locales= [{name:'es',label:'Español'},{name:'en',label:'Inglés'},{name:'ca@valencia',label:"Valenciano"}];
+                locales= [{name:'es',label:'Español'},{name:'en',label:'Inglés'},{name:'ca-es-valencia',label:"Valenciano"}];
                 break;
-            case 'ca@valencia':
-                locales=[{name:'en',label:'Anglès'},{name:'es',label:'Espanyol'},{name:'ca@valencia',label:"Valencià"}];
+            case 'ca-es-valencia':
+                locales=[{name:'en',label:'Anglès'},{name:'es',label:'Espanyol'},{name:'ca-es-valencia',label:"Valencià"}];
                 break;
             default:
-                locales=[{name:'en',label:'English'},{name:'es',label:'Spanish'},{name:'ca@valencia',label:"Valencian"}];
+                locales=[{name:'en',label:'English'},{name:'es',label:'Spanish'},{name:'ca-es-valencia',label:"Valencian"}];
             
         }  
    
