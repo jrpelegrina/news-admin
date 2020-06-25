@@ -1,0 +1,14 @@
+Source: news-admin
+Section: admin
+Priority: extra
+Maintainer: LliureX Team <lliurex@gva.es>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.1.2
+Homepage: http://lliurex.net
+
+Package: ghost-admin
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends},ghost
+Description: ghost-admin module
+ Install admin module to ghost
+
