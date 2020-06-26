@@ -1,3 +1,9 @@
+news-admin (0.2) bionic; urgency=medium
+
+  * Fixed valencian translation
+  
+ -- Juan Ramon Pelegrina <juapesai@hotmail.com>  Fri, 26 Jun 2020 11:25:39 +0200
+
 news-admin (0.1) bionic; urgency=medium
 
   * Initial release.
