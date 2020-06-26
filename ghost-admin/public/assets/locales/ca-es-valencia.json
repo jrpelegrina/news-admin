@@ -1168,18 +1168,13 @@
     },
     "Uh-oh! Trouble reaching the Unsplash API, please check your connection": "Si teniu problemes per a accedir a l'API d'Unsplash, comproveu la vostra connexió",
     "moment": {
-        "at {time}": "hora {time}",
-        "DD MMM YYYY": "DD MMM AAAA",
-        "": [
-            "[a] HH:mm [de demà]",
-            "[a] HH:mm [de demà]"
-        ],
-        "[at] HH:mm [on] DD MMM YYYY": "[a] HH:mm [de] DD MMM AAAA",
-        "HH:mm ": [
-            "HH:mm [Ahir]",
-            "HH:mm [Hui]"
-        ]
-    },
+    "at {time}": "a les {time}",
+    "HH:mm [Today]": "HH:mm [Hui]",
+    "HH:mm [Yesterday]": "HH:mm [Ahir]",
+    "[at] HH:mm [Tomorrow]": "[a les] HH:mm [de demà]",
+    "[at] HH:mm [on] DD MMM YYYY": "[a les] HH:mm [del] DD MMM YYYY",
+    "DD MMM YYYY": "DD MMM YYYY"
+  },
     "There was a problem on the server, please try again": {
         "": "Hi ha hagut un problema amb el servidor, torneu-ho a intentar."
     },
