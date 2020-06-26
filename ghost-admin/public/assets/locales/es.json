@@ -171,7 +171,7 @@
   "Last edited {date}": "Última edición {date}",
   "Will go live {date}": "Estará activo {date}",
   "moment": {
-    "at {time}": "el {time}",
+    "at {time}": "a las {time}",
     "HH:mm [Today]": "HH:mm [Hoy]",
     "HH:mm [Yesterday]": "HH:mm [Ayer]",
     "[at] HH:mm [Tomorrow]": "[a las] HH:mm [de Mañana]",
