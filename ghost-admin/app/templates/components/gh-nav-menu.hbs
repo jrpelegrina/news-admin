@@ -112,6 +112,11 @@ LLIUREX --}}
                         <GhBillingUpdateButton />
                     </li>
                 {{/if}}
+{{!-- LLIUREX Add link to Slideshow admin page --}}                
+                 <li class="relative">
+                    <a href="{{this.config.slideshowDomain}}" target="_blank">{{svg-jar "slideshow"}} {{t "Manage Slideshow"}}</a>
+                </li>
+{{!-- LLIUREX --}}
             </ul>
         {{/if}}
 

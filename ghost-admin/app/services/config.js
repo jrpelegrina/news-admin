@@ -66,5 +66,16 @@ export default Service.extend(_ProxyMixin, {
             .replace(/\/?$/, '');
 
         return blogDomain;
+    }),
+
+//LLIUREX Added function to obtain slideshow url 
+    slideshowDomain: computed('blogUrl', function () {
+        let blogUrl = this.get('blogUrl');
+        let slideshowDomain = blogUrl.replace('news','srv')
+           // .replace(/\/?$/, '');
+
+        return slideshowDomain;
     })
+//LLIUREX
+
 });
