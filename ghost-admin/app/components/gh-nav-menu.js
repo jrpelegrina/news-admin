@@ -19,6 +19,8 @@ export default Component.extend(ShortcutsMixin, {
     session: service(),
     ui: service(),
     whatsNew: service(),
+    //LLIUREX: Get default locale
+    settings: service(),
 
     tagName: 'nav',
     classNames: ['gh-nav'],
@@ -41,6 +43,9 @@ export default Component.extend(ShortcutsMixin, {
     showBillingModal: computed.reads('billing.billingWindowOpen'),
     showBilling: computed.reads('config.billingUrl'),
 
+    //LLIUREX: Get default locale
+    defaultValencian:null,
+
     init() {
         this._super(...arguments);
 
@@ -48,8 +53,20 @@ export default Component.extend(ShortcutsMixin, {
 
         shortcuts[`${ctrlOrCmd}+k`] = {action: 'toggleSearchModal'};
         this.shortcuts = shortcuts;
-    },
 
+        //LLIUREX: get default locale to show wiki in same language
+        let currentLocale=this.get('settings.defaultLocale');
+
+        if (currentLocale.toString()==="ca-es-valencia"){
+            this.defaultValencian=true;
+        }else{
+
+            this.defaultValencian=false;
+        }
+   
+   },   
+
+    
     // the menu has a rendering issue (#8307) when the the world is reloaded
     // during an import which we have worked around by not binding the icon
     // style directly. However we still need to keep track of changing icons
