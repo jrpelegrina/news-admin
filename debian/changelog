@@ -1,3 +1,11 @@
+news-admin (0.3) bionic; urgency=medium
+
+  * Fixed translations
+  * Added link to slideshow admin page
+  * Changes to show help link in the same locale that news
+  
+ -- Juan Ramon Pelegrina <juapesai@hotmail.com>  Tue, 14 Jul 2020 12:29:10 +0200
+
 news-admin (0.2) bionic; urgency=medium
 
   * Fixed valencian translation
